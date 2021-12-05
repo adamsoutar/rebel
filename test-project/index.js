@@ -16,7 +16,7 @@ const TestElem = () => {
 
   return createElement(
     'div',
-    { style: 'height: 100%' },
+    { style: 'color: orange' },
     createElement(Greeter, { name })
   )
 }

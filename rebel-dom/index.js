@@ -4,10 +4,21 @@ import { render as rebelRender } from '../rebel/index.js'
 // by Rebel, and draws it in the DOM
 function renderToDOM (rEl, domTarget) {
   if (rEl.type !== 'baseElement') {
-    throw new Error(`Unimplemented Rebel DOM type ${rEl.type}`)
+    throw new Error(`Unimplemented Rebel DOM type "${rEl.type}"`)
   }
 
   const myDOM = document.createElement(rEl.baseElement)
+
+  for (const propName in rEl.props) {
+    const value = rEl.props[propName]
+
+    if (
+      typeof value === 'string' ||
+      typeof value === 'number'
+    ) {
+      myDOM.setAttribute(propName, value)
+    }
+  }
 
   for (const child of rEl.children) {
     if (child == null) continue

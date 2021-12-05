@@ -23,7 +23,4 @@ const TestElem = () => {
 
 const rootElement = createElement(TestElem, null)
 
-console.dir(
-  render(rootElement, null),
-  false, null, true
-)
+render(rootElement, document.getElementById('root'))

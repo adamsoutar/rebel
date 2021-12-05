@@ -1,0 +1,15 @@
+{
+  "name": "rebel-dom",
+  "version": "1.0.0",
+  "description": "Renderer for Rebel.js",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Adam Soutar",
+  "license": "MIT"
+}

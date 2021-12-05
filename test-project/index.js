@@ -1,5 +1,5 @@
-import { inspect } from 'util'
-import { createElement, render } from 'rebel'
+import { createElement } from '../rebel/index.js'
+import { render } from '../rebel-dom/index.js'
 
 /*
   <span>Hello, {name}!</span>
@@ -12,21 +12,18 @@ const Greeter = ({ name }) => {
   <div style='height: 100%'><Greeter name='Adam' /></div>
 */
 const TestElem = () => {
-  let name = 'Adam'
+  const name = 'Adam'
 
   return createElement(
     'div',
     { style: 'height: 100%' },
-    createElement(Greeter, { name: 'Adam' })
+    createElement(Greeter, { name })
   )
 }
 
 const rootElement = createElement(TestElem, null)
 
-console.log(
-  // Infinite depth console.dir
-  inspect(
-    render(rootElement),
-    false, null, true
-  )
+console.dir(
+  render(rootElement, null),
+  false, null, true
 )

@@ -3,13 +3,22 @@
   "version": "1.0.0",
   "description": "Test package for Rebel Render",
   "type": "module",
-  "main": "index.js",
+  "source": "./index.js",
+  "exports": "./dist/build.js",
+  "main": null,
+  "module": null,
+  "unpkg": null,
   "scripts": {
-    "test": "standard"
+    "test": "standard",
+    "build": "microbundle",
+    "dev": "microbundle watch"
   },
   "keywords": [
     "react"
   ],
   "author": "Adam Soutar",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "microbundle": "^0.14.2"
+  }
 }

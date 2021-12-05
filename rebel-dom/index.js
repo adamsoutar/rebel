@@ -46,7 +46,9 @@ function renderToDOM (rEl, domTarget) {
 }
 
 function render (el, domTarget) {
-  const rEl = rebelRender(el)
+  const [rEl, fireAgain] = rebelRender(el)
+
+  window.REBEL_GLOBAL_FIRE_AGAIN = fireAgain
 
   // Clear out all children from a previous render
   while (domTarget.firstChild) {

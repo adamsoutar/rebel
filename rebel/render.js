@@ -1,9 +1,10 @@
 export default function render (initialEl) {
   // What we rendered last time.
   // This is used for matching up and persisting state across renders
-  let prevTree = {}
+  let prevTree = null
 
-  function reRender (el, amRoot = false) {
+  function reRender (el, prevTreeSoFar, amRoot = false) {
+    // console.log(`prevTreeSoFar: ${prevTreeSoFar}`)
     // Sometimes we get asked to "render" a child that is not a proper component
     if (el == null) return null
     switch (typeof el) {
@@ -14,6 +15,52 @@ export default function render (initialEl) {
 
     const propsWithoutChildren = { ...el.props }
     delete propsWithoutChildren.children
+
+    // A very, *very* WIP reconcilliation engine
+    // It will attempt to find itself in the previous render tree
+    let match = null
+    const pTSFC = prevTreeSoFar?.children
+
+    if (amRoot) {
+      if (prevTreeSoFar?.renderFn === el.elem) {
+        // Matched the root.
+        match = prevTreeSoFar
+      }
+    }
+
+    if (!amRoot && pTSFC) {
+      for (let i = 0; i < pTSFC.length; i++) {
+        const child = pTSFC[i]
+        // Attempting to match a rebelComponent across renders
+        if (
+          !child.matched &&
+          child.type === 'rebelComponent' &&
+          child.renderFn === el.elem
+        ) {
+          // We've found ourselves from last render!
+          child.matched = true
+          match = child
+          break
+        }
+
+        // Attempting to match a baseElement across renders
+        if (
+          !child.matched &&
+          child.type === 'baseElement' &&
+          child.baseElement === el.elem
+        ) {
+          child.matched = true
+          match = child
+          break
+        }
+      }
+    }
+
+    if (match == null) {
+      console.log('Match is null, we are a newly mounted component!')
+    } else {
+      console.log('We were matched up with a component from prevTree, state will persist!')
+    }
 
     let result
     switch (typeof el.elem) {
@@ -26,13 +73,13 @@ export default function render (initialEl) {
           type: 'rebelComponent',
           renderFn: el.elem,
           props: propsWithoutChildren,
-          children: [reRender(renderResult)]
+          children: [reRender(renderResult, match)]
         }
         break
       } case 'string': {
         // A base element like a div or span
         const renderedChildren = el.props.children.map(
-          child => reRender(child)
+          child => reRender(child, match)
         )
 
         result = {
@@ -56,5 +103,5 @@ export default function render (initialEl) {
     return result
   }
 
-  return reRender(initialEl, true)
+  return [reRender(initialEl, prevTree, true), () => reRender(initialEl, prevTree, true)]
 }

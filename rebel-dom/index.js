@@ -3,6 +3,15 @@ import { render as rebelRender } from '../rebel/index.js'
 // Takes an element that's already been "rendered"
 // by Rebel, and draws it in the DOM
 function renderToDOM (rEl, domTarget) {
+  if (rEl.type === 'rebelComponent') {
+    // These are just wrappers used by the reconcilliation algorithm
+    // Let's go straight to its children
+    for (const child of rEl.children) {
+      renderToDOM(child, domTarget)
+    }
+    return
+  }
+
   if (rEl.type !== 'baseElement') {
     throw new Error(`Unimplemented Rebel DOM type "${rEl.type}"`)
   }

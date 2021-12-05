@@ -2,25 +2,31 @@ import { createElement } from '../rebel/index.js'
 import { render } from '../rebel-dom/index.js'
 
 /*
-  <span>Hello, {name}!</span>
+  <div>You've clicked {count} times</div>
 */
-const Greeter = ({ name }) => {
-  return createElement('span', null, 'Hello, ', name, '!')
+const Message = ({ count }) => {
+  return createElement('div', null, "You've clicked ", count, ' times')
 }
 
 /*
-  <div style='height: 100%'><Greeter name='Adam' /></div>
+  <div>
+    <Message count={count} />
+    <button onPress={() => setPress(count+1)}>Increment</button>
+  </div>
 */
-const TestElem = () => {
-  const name = 'Adam'
+const Counter = () => {
+  const [count, setCount] = [0, () => {}]
 
   return createElement(
     'div',
-    { style: 'color: orange' },
-    createElement(Greeter, { name })
+    null,
+    createElement(Message, { count }),
+    createElement('button', { onPress: () => setCount(count + 1) }, 'Increment')
   )
 }
 
-const rootElement = createElement(TestElem, null)
-
+/*
+  ReactDOM.render(<Counter />, document.getElementById('root'))
+*/
+const rootElement = createElement(Counter, null)
 render(rootElement, document.getElementById('root'))

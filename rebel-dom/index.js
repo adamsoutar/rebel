@@ -1,4 +1,5 @@
 import { render as rebelRender } from '../rebel/index.js'
+import { addEventIfNecessary } from './events.js'
 
 // Takes an element that's already been "rendered"
 // by Rebel, and draws it in the DOM
@@ -27,6 +28,8 @@ function renderToDOM (rEl, domTarget) {
     ) {
       myDOM.setAttribute(propName, value)
     }
+
+    addEventIfNecessary(propName, value, myDOM)
   }
 
   for (const child of rEl.children) {

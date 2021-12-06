@@ -11,20 +11,17 @@ const Message = ({ count }) => {
 /*
   <div>
     <Message count={count} />
-    <button onPress={() => setPress(count+1)}>Increment</button>
+    <button onClick={() => setCount(count+1)}>Increment</button>
   </div>
 */
 const Counter = () => {
   const [count, setCount] = useState(0)
 
-  console.log(`Counter render: count is ${count}`)
-  window.setCount = setCount
-
   return createElement(
     'div',
     null,
     createElement(Message, { count }),
-    createElement('button', { onPress: () => setCount(count + 1) }, 'Increment')
+    createElement('button', { onClick: () => setCount(count + 1) }, 'Increment')
   )
 }
 

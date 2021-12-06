@@ -66,6 +66,12 @@ export default function render (initialEl) {
     switch (typeof el.elem) {
       case 'function': {
         // A functional Rebel component. Let's call its render method
+        // useState etc. will look this up
+        const newState = {}
+        window.__REBEL_STATE = match ? match.state : newState
+        // We make an object that hooks can use to store info in
+        // just for this render - this way hooks can talk to each other
+        window.__REBEL_PER_RENDER_STATE = {}
         const renderResult = el.elem(el.props)
         // The renderer (ie. Rebel DOM) doesn't need to care about this wrapper,
         // but we will use it in prevTree for matching state
@@ -73,7 +79,8 @@ export default function render (initialEl) {
           type: 'rebelComponent',
           renderFn: el.elem,
           props: propsWithoutChildren,
-          children: [reRender(renderResult, match)]
+          children: [reRender(renderResult, match)],
+          state: match ? match.state : newState
         }
         break
       } case 'string': {

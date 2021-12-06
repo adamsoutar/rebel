@@ -1,4 +1,4 @@
-import { createElement } from '../rebel/index.js'
+import { createElement, useState } from '../rebel/index.js'
 import { render } from '../rebel-dom/index.js'
 
 /*
@@ -15,7 +15,10 @@ const Message = ({ count }) => {
   </div>
 */
 const Counter = () => {
-  const [count, setCount] = [0, () => {}]
+  const [count, setCount] = useState(0)
+
+  console.log(`Counter render: count is ${count}`)
+  window.setCount = setCount
 
   return createElement(
     'div',

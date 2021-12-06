@@ -31,6 +31,10 @@ export default function render (initialEl) {
     if (!amRoot && pTSFC) {
       for (let i = 0; i < pTSFC.length; i++) {
         const child = pTSFC[i]
+
+        // nulls aren't matched
+        if (child == null) continue
+
         // Attempting to match a rebelComponent across renders
         if (
           !child.matched &&

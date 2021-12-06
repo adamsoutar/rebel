@@ -11,11 +11,8 @@ function rebelPropToDOMEvent (eventName) {
 }
 
 export function addEventIfNecessary (propName, value, domTarget) {
-  console.log(`Asked to add ${propName}`)
   if (!eventNames.includes(propName)) return
-  console.log("That's a valid name")
 
   const domName = rebelPropToDOMEvent(propName)
-  console.log(`Adding ${domName}`)
   domTarget.addEventListener(domName, value)
 }

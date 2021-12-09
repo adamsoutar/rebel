@@ -4,6 +4,10 @@
   "description": "A React clone",
   "type": "module",
   "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./jsx-runtime": "./jsxRuntime.js"
+  },
   "scripts": {
     "test": "standard"
   },

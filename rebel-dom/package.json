@@ -10,6 +10,9 @@
   "keywords": [
     "react"
   ],
+  "dependencies": {
+    "rebel": "file:../rebel"
+  },
   "author": "Adam Soutar",
   "license": "MIT"
 }

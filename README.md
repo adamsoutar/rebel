@@ -18,7 +18,6 @@ You can take any file made for React, and drop in Rebel libraries instead. For
 example:
 
 ```js
-/** @jsxImportSource rebel */
 import { useState } from 'rebel'
 import { render } from 'rebel-dom'
 
@@ -42,7 +41,7 @@ const Counter = () => {
 render(<Counter />, document.getElementById('root'))
 ```
 
-**Note**: Rebel supports JSX. You must tell Babel you're not using React via the `@jsxImportSource` directive.
+**Note**: Rebel supports JSX. See [webpack-project](./tree/master/webpack-project)
 
 ---
 

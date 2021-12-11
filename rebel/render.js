@@ -1,3 +1,5 @@
+import isSameComponent from './isSameComponent.js'
+
 export default function render (initialEl) {
   // What we rendered last time.
   // This is used for matching up and persisting state across renders
@@ -21,11 +23,9 @@ export default function render (initialEl) {
     let match = null
     const pTSFC = prevTreeSoFar?.children
 
-    if (amRoot) {
-      if (prevTreeSoFar?.renderFn === el.elem) {
-        // Matched the root.
-        match = prevTreeSoFar
-      }
+    if (amRoot && isSameComponent(prevTreeSoFar, el)) {
+      // Matched the root.
+      match = prevTreeSoFar
     }
 
     if (!amRoot && pTSFC) {
@@ -35,23 +35,10 @@ export default function render (initialEl) {
         // nulls aren't matched
         if (child == null) continue
 
-        // Attempting to match a rebelComponent across renders
+        // Attempting to match a rebelComponent or baseElement across renders
         if (
           !child.matched &&
-          child.type === 'rebelComponent' &&
-          child.renderFn === el.elem
-        ) {
-          // We've found ourselves from last render!
-          child.matched = true
-          match = child
-          break
-        }
-
-        // Attempting to match a baseElement across renders
-        if (
-          !child.matched &&
-          child.type === 'baseElement' &&
-          child.baseElement === el.elem
+          isSameComponent(child, el)
         ) {
           child.matched = true
           match = child

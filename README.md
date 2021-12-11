@@ -41,7 +41,7 @@ const Counter = () => {
 render(<Counter />, document.getElementById('root'))
 ```
 
-**Note**: Rebel supports JSX. See [webpack-project](./tree/master/webpack-project)
+**Note**: Rebel supports JSX. See [webpack-project](./webpack-project)
 
 ---
 

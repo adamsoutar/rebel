@@ -1,10 +1,14 @@
-import { useState } from 'rebel'
+import { useState, useEffect } from 'rebel'
 import { render } from 'rebel-dom'
 
 const Greeting = ({ name }) => <em>{name}</em>
 
 const Counter = () => {
   const [num, setNum] = useState(0)
+
+  useEffect(() => {
+    console.log(`Effect: num is now ${num}!`)
+  }, [num])
 
   return (
     <div>

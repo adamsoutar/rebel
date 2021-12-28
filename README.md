@@ -31,9 +31,7 @@ const Counter = () => {
   return (
     <div>
       <Message count={count} />
-      <button onClick={() => setCount(count + 1)}>
-        Click me!
-      </button>
+      <button onClick={() => setCount(count + 1)}>Click me!</button>
     </div>
   )
 }

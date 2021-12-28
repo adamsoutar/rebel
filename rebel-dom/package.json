@@ -14,5 +14,8 @@
     "rebel": "file:../rebel"
   },
   "author": "Adam Soutar",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  }
 }

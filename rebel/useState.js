@@ -1,4 +1,4 @@
-export default function useState (defaultValue) {
+export default function useState(defaultValue) {
   // This component's persisted state object
   const compState = window.__REBEL_STATE
   const perRen = window.__REBEL_PER_RENDER_STATE

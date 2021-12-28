@@ -3,7 +3,7 @@ import { addEventIfNecessary } from './events.js'
 
 // Takes an element that's already been "rendered"
 // by Rebel, and draws it in the DOM
-function renderToDOM (rEl, domTarget) {
+function renderToDOM(rEl, domTarget) {
   if (rEl.type === 'rebelComponent') {
     // These are just wrappers used by the reconcilliation algorithm
     // Let's go straight to its children
@@ -22,10 +22,7 @@ function renderToDOM (rEl, domTarget) {
   for (const propName in rEl.props) {
     const value = rEl.props[propName]
 
-    if (
-      typeof value === 'string' ||
-      typeof value === 'number'
-    ) {
+    if (typeof value === 'string' || typeof value === 'number') {
       myDOM.setAttribute(propName, value)
     }
 
@@ -48,7 +45,7 @@ function renderToDOM (rEl, domTarget) {
   domTarget.append(myDOM)
 }
 
-function render (el, domTarget) {
+function render(el, domTarget) {
   const [rEl, fireAgain] = rebelRender(el)
 
   window.__REBEL_GLOBAL_FIRE_AGAIN = () => {

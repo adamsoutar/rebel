@@ -1,11 +1,11 @@
 import isSameComponent from './isSameComponent.js'
 
-export default function render (initialEl) {
+export default function render(initialEl) {
   // What we rendered last time.
   // This is used for matching up and persisting state across renders
   let prevTree = null
 
-  function reRender (el, prevTreeSoFar, amRoot = false) {
+  function reRender(el, prevTreeSoFar, amRoot = false) {
     // console.log(`prevTreeSoFar: ${prevTreeSoFar}`)
     // Sometimes we get asked to "render" a child that is not a proper component
     if (el == null) return null
@@ -36,10 +36,7 @@ export default function render (initialEl) {
         if (child == null) continue
 
         // Attempting to match a rebelComponent or baseElement across renders
-        if (
-          !child.matched &&
-          isSameComponent(child, el)
-        ) {
+        if (!child.matched && isSameComponent(child, el)) {
           child.matched = true
           match = child
           break
@@ -50,7 +47,9 @@ export default function render (initialEl) {
     if (match == null) {
       console.log('Match is null, we are a newly mounted component!')
     } else {
-      console.log('We were matched up with a component from prevTree, state will persist!')
+      console.log(
+        'We were matched up with a component from prevTree, state will persist!'
+      )
     }
 
     let result
@@ -74,10 +73,11 @@ export default function render (initialEl) {
           state: match ? match.state : newState
         }
         break
-      } case 'string': {
+      }
+      case 'string': {
         // A base element like a div or span
-        const renderedChildren = el.props.children.map(
-          child => reRender(child, match)
+        const renderedChildren = el.props.children.map(child =>
+          reRender(child, match)
         )
 
         result = {
@@ -87,7 +87,8 @@ export default function render (initialEl) {
           children: renderedChildren
         }
         break
-      } default: {
+      }
+      default: {
         throw new Error(`Unimplemented element type "${typeof el.elem}"`)
       }
     }
@@ -101,5 +102,8 @@ export default function render (initialEl) {
     return result
   }
 
-  return [reRender(initialEl, prevTree, true), () => reRender(initialEl, prevTree, true)]
+  return [
+    reRender(initialEl, prevTree, true),
+    () => reRender(initialEl, prevTree, true)
+  ]
 }

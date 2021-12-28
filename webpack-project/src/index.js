@@ -1,9 +1,7 @@
 import { useState } from 'rebel'
 import { render } from 'rebel-dom'
 
-const Greeting = ({ name }) => (
-  <em>{name}</em>
-)
+const Greeting = ({ name }) => <em>{name}</em>
 
 const Counter = () => {
   const [num, setNum] = useState(0)
@@ -19,7 +17,9 @@ const Counter = () => {
 
 render(
   <div>
-    <p>Hello, <Greeting name='Adam' />!</p>
+    <p>
+      Hello, <Greeting name='Adam' />!
+    </p>
     <Counter />
     <Counter />
   </div>,

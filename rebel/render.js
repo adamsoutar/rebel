@@ -44,13 +44,13 @@ export default function render(initialEl) {
       }
     }
 
-    if (match == null) {
-      console.log('Match is null, we are a newly mounted component!')
-    } else {
-      console.log(
-        'We were matched up with a component from prevTree, state will persist!'
-      )
-    }
+    // if (match == null) {
+    //   console.log('Match is null, we are a newly mounted component!')
+    // } else {
+    //   console.log(
+    //     'We were matched up with a component from prevTree, state will persist!'
+    //   )
+    // }
 
     let result
     switch (typeof el.elem) {
@@ -95,8 +95,8 @@ export default function render(initialEl) {
 
     if (amRoot) {
       prevTree = result
-      console.log('prevTree is now:')
-      console.dir(prevTree)
+      // console.log('prevTree is now:')
+      // console.dir(prevTree)
     }
 
     return result

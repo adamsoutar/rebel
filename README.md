@@ -12,13 +12,21 @@ would still function the same.
 Hopefully through creating it, I can better understand the inner workings of a
 library which is sometimes seen as a bit of black-box magic :)
 
+## Features
+
+Rebel, _at the moment_ implements:
+
+- A component tree reconciliation algorithm
+- DOM rendering
+- Persisted hooks & state including `useState` and `useEffect`
+
 ## Example
 
-You can take any file made for React, and drop in Rebel libraries instead. For
+The goal is to be able to take any file made for React, and drop in Rebel libraries instead. For
 example:
 
 ```js
-import { useState } from 'rebel'
+import { useState, useEffect } from 'rebel'
 import { render } from 'rebel-dom'
 
 const Message = ({ count }) => {
@@ -27,6 +35,10 @@ const Message = ({ count }) => {
 
 const Counter = () => {
   const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    console.log(`Effect: Count is ${count}!`)
+  }, [count])
 
   return (
     <div>
